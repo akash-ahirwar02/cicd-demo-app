@@ -7,7 +7,6 @@ pipeline {
         AWS_ACCOUNT_ID        = credentials('AWS_ACCOUNT_ID')
         AWS_REGION            = 'us-east-2'
         ECR_REPO              = 'cicd-demo-app'
-        ECR_URI               = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}"
         IMAGE_TAG             = "${BUILD_NUMBER}"
         CLUSTER_NAME          = 'cicd-cluster'
     }
@@ -38,6 +37,7 @@ pipeline {
             steps {
                 echo '==> Docker image build ho rahi hai...'
                 sh '''
+                    ECR_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}"
                     docker build -t ${ECR_REPO}:${IMAGE_TAG} .
                     docker tag ${ECR_REPO}:${IMAGE_TAG} ${ECR_URI}:${IMAGE_TAG}
                     docker tag ${ECR_REPO}:${IMAGE_TAG} ${ECR_URI}:latest
@@ -49,6 +49,7 @@ pipeline {
             steps {
                 echo '==> Image ECR pe push ho rahi hai...'
                 sh '''
+                    ECR_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}"
                     aws ecr get-login-password --region ${AWS_REGION} | \
                         docker login --username AWS --password-stdin \
                         ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
@@ -62,6 +63,7 @@ pipeline {
             steps {
                 echo '==> EKS pe deploy ho raha hai...'
                 sh '''
+                    ECR_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPO}"
                     aws eks update-kubeconfig \
                         --region ${AWS_REGION} \
                         --name ${CLUSTER_NAME}
