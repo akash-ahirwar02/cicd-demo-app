@@ -96,7 +96,7 @@ cicd-demo-app/
 **Jenkins — Pipeline Success**
 <img width="1362" height="681" alt="Screenshot_7" src="https://github.com/user-attachments/assets/4b32e42a-03ac-425f-9c5a-8aeae0ef0a9a" />
 
-**EC2 Inctanace  && EKS Cluster**
+**EC2 Instance**
 <img width="1362" height="602" alt="Screenshot_6" src="https://github.com/user-attachments/assets/f52eb40b-ce94-4a9e-9615-cd7a49367e9b" />
 
 **App Live on Browser**
@@ -130,8 +130,5 @@ cicd-demo-app/
 
 ## Author
 
-**Akash Ahirwar** — DevOps Enthusiastic
+**Akash Ahirwar** — DevOps Engineer
 
-[![GitHub](https://github.com/akash-ahirwar02/cicd-demo-app)
-
-If you found this helpful, please ⭐ star this repository!
